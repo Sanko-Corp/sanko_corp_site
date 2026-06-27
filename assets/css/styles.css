@@ -293,20 +293,25 @@ button {
 .intro h2 { font-size: 32px; font-weight: 700; color: var(--navy); margin: 18px 0 22px; }
 .intro p { font-size: 16px; color: var(--ink-1); max-width: 720px; margin: 0 auto; }
 
-.nav-cards { max-width: var(--maxw); margin: 0 auto; padding: 50px var(--pad-x) 96px; }
-.nav-cards__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
-.feature-card {
-  display: flex; flex-direction: column;
-  border: 1px solid var(--border); border-radius: var(--radius-card);
-  overflow: hidden; background: #fff; box-shadow: var(--shadow-card);
-  transition: box-shadow .25s ease, transform .25s ease;
+/* Alternating full-width feature rows（Home / 採用情報で共用） */
+.features { max-width: var(--maxw); margin: 0 auto; padding: 40px var(--pad-x) 100px; display: flex; flex-direction: column; gap: 88px; }
+.feature {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+  color: inherit;
 }
-.feature-card:hover { box-shadow: var(--shadow-card-h); transform: translateY(-4px); }
-.feature-card__media { height: 170px; }
-.feature-card__body { padding: 30px 28px; display: flex; flex-direction: column; flex: 1; }
-.feature-card__num { font-size: 11px; font-weight: 700; letter-spacing: .2em; color: var(--blue-accent); margin-bottom: 8px; }
-.feature-card__body h3 { font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
-.feature-card__body p { font-size: 14px; color: var(--ink-2); flex: 1; margin-bottom: 20px; }
+.feature--reverse .feature__media { order: 1; }
+.feature--reverse .feature__text { order: 2; }
+.feature__media { height: 360px; border-radius: var(--radius-card); overflow: hidden; box-shadow: var(--shadow-card); }
+.feature__media img { transition: transform .5s ease; }
+.feature:hover .feature__media img { transform: scale(1.05); }
+.feature__num { font-family: var(--font-head); font-weight: 900; font-size: 60px; color: var(--pale-1); line-height: 1; margin-bottom: 4px; }
+.feature__text h2 { font-size: 30px; font-weight: 700; color: var(--navy); margin: 6px 0 18px; }
+.feature__text p { font-size: 15px; color: var(--ink-1); margin-bottom: 26px; }
+a.feature:hover .text-link { gap: 11px; }
+
+/* 単独のワイド写真帯 */
+.photo-band { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad-x); }
+.photo-band__frame { height: 380px; border-radius: var(--radius-card); overflow: hidden; box-shadow: var(--shadow-card); }
 
 /* =========================================================================
    BUSINESS
@@ -366,25 +371,28 @@ button {
 .section { max-width: 1080px; margin: 0 auto; padding: 80px var(--pad-x) 24px; }
 .section__title { font-size: 28px; font-weight: 700; color: var(--navy); text-align: center; margin: 12px 0 40px; }
 
-.persona-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.persona-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .persona {
-  border: 1px solid var(--border); border-radius: 16px; padding: 30px 26px;
-  background: #fff; border-top: 4px solid var(--blue-accent);
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  border: 1px solid var(--border); border-radius: var(--radius-card);
+  padding: 44px 30px 38px; background: #fff;
+  box-shadow: var(--shadow-card);
+  transition: transform .25s ease, box-shadow .25s ease;
 }
-.persona p { font-size: 15px; font-weight: 500; color: var(--ink-3); }
-.persona strong { color: var(--blue); }
+.persona:hover { transform: translateY(-4px); box-shadow: var(--shadow-card-h); }
+.persona__icon {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: var(--bg-tint); color: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 22px;
+}
+.persona__icon svg { width: 28px; height: 28px; }
+.persona__title { font-family: var(--font-head); font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.persona p { font-size: 14px; font-weight: 500; color: var(--ink-2); line-height: 1.9; }
 
 .reasons-band { background: var(--bg-tint); margin-top: 70px; padding: 74px var(--pad-x); }
 .reasons-band__inner { max-width: 1080px; margin: 0 auto; }
-.reasons { display: flex; flex-direction: column; gap: 24px; }
-.reason {
-  display: grid; grid-template-columns: auto 1fr; gap: 30px; align-items: start;
-  background: #fff; border-radius: var(--radius-card); padding: 40px 44px;
-  box-shadow: 0 6px 24px rgba(13, 39, 64, .06);
-}
-.reason__num { font-family: var(--font-head); font-weight: 900; font-size: 52px; color: var(--pale-1); line-height: 1; }
-.reason h3 { font-size: 21px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
-.reason p { font-size: 15px; color: var(--ink-1); }
+.reasons { display: flex; flex-direction: column; gap: 72px; }
 
 .requirements { max-width: 920px; margin: 0 auto; padding: 80px var(--pad-x) 30px; }
 .req-table { border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
@@ -463,11 +471,21 @@ button {
   .nav__link.is-active { border-bottom-color: var(--border); }
   .nav__cta { margin: 12px 0 0; text-align: center; }
 
-  .nav-cards__grid,
   .persona-grid { grid-template-columns: 1fr; }
 
   .site-footer__grid { grid-template-columns: 1fr; gap: 32px; }
   .site-footer__col-title { min-height: 0; }
+
+  .features { gap: 56px; padding-bottom: 72px; }
+  .feature,
+  .feature--reverse { grid-template-columns: 1fr; gap: 22px; }
+  .feature__media { order: -1; height: 240px; }
+  .feature--reverse .feature__media { order: -1; }
+  .feature--reverse .feature__text { order: 0; }
+  .feature__num { font-size: 48px; }
+  .feature__text h2 { font-size: 26px; }
+  .reasons { gap: 48px; }
+  .photo-band__frame { height: 240px; }
 
   .biz-row,
   .biz-row--reverse { grid-template-columns: 1fr; gap: 24px; }
@@ -482,7 +500,6 @@ button {
   .page-head__title { font-size: 30px; }
   .recruit-hero__title { font-size: 34px; }
   .intro h2 { font-size: 26px; }
-  .reason { grid-template-columns: 1fr; gap: 12px; padding: 32px 28px; }
   .req-row { grid-template-columns: 1fr; }
   .req-row__key { border-bottom: 1px solid #eef2f6; }
 }
